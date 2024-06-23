@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-
+import NavLink from "./NavLink";
+import { navLinks } from "../Data";
+import MobileNavLink from "./MobileNavLink";
 const Topnav = () => {
   const [sideNav, setSideNav] = useState(false);
 
@@ -13,7 +15,7 @@ const Topnav = () => {
     >
       <div>
         <nav>
-          <div className="absolute right-5 mt-5 cursor-pointer lg:hidden">
+          <div className="z-10 fixed right-5 mt-5 cursor-pointer lg:hidden bg-slate-500 h-10 w-10 flex justify-center items-center rounded-full">
             <i
               onClick={() => setSideNav(!sideNav)}
               className="fa-solid fa-bars text-2xl"
@@ -29,12 +31,12 @@ const Topnav = () => {
           >
             <i
               onClick={() => setSideNav(!setSideNav)}
-              className="fa-solid fa-xmark fixed right-10 mt-5 text-2xl cursor-pointer h-[100vh]"
+              className="z-50 fa-solid fa-xmark fixed right-10 mt-5 text-2xl cursor-pointer h-[100vh]"
             ></i>
 
             <div className=" h-[550px] flex justify-center items-center  ">
               <ul className="flex flex-col gap-6 text-[20px] font-lato w-[200px]">
-                <li className="hover:bg-[#0B2126] rounded-full px-5 py-2 hover:text-white cursor-pointer transition-colors duration-300">
+                {/* <li className="hover:bg-[#0B2126] rounded-full px-5 py-2 hover:text-white cursor-pointer transition-colors duration-300">
                   MAIN
                 </li>
                 <li className="hover:bg-[#0B2126] rounded-full px-5 py-2 hover:text-white cursor-pointer transition-colors duration-300">
@@ -51,7 +53,10 @@ const Topnav = () => {
                 </li>
                 <li className="hover:bg-[#0B2126] rounded-full px-5 py-2 hover:text-white cursor-pointer transition-colors duration-300">
                   CONTACTS
-                </li>
+                </li> */}
+                {navLinks.map((navlink) => {
+                  return <MobileNavLink key={navlink.id} {...navlink} />;
+                })}
               </ul>
             </div>
           </div>
@@ -64,12 +69,9 @@ const Topnav = () => {
             />
             <div className="hidden lg:flex">
               <ul className="text-white list-none flex gap-5 text-1xl font-lato cursor-pointer">
-                <li>MAIN</li>
-                <li>ABOUT US</li>
-                <li>TOURS</li>
-                <li>GALLERY</li>
-                <li>REVIEWS</li>
-                <li>CONTACTS</li>
+                {navLinks.map((navlink) => {
+                  return <NavLink key={navlink.id} {...navlink} />;
+                })}
               </ul>
             </div>
             <div className="bg-white rounded-full flex items-center px-2 w-[200px] sm:w-[400px] lg:w-[300px] relative">
@@ -82,6 +84,7 @@ const Topnav = () => {
             </div>
           </div>
           <div
+            id="main"
             data-aos="fade-right"
             className="max-w-[1000px] m-auto pt-20 lg:pt-40 pl-5 sm:pl-0 "
           >
